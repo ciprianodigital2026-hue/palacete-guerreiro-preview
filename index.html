@@ -24,6 +24,14 @@ button{cursor:pointer;font-family:inherit}
 .nav-links a:hover,.nav-links a.active{color:#A69C6E;border-color:#A69C6E}
 .nav-cta{font-family:'Cormorant',serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;padding:10px 24px;border:1px solid #A69C6E;color:#A69C6E;background:transparent;transition:all 0.3s}
 .nav-cta:hover{background:#A69C6E;color:#253C45}
+
+/* LANG SELECTOR */
+.lang-selector{position:relative;display:flex;align-items:center;gap:6px;margin-left:16px}
+.lang-btn{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#B8A99A;background:none;border:none;cursor:pointer;padding:6px 8px;transition:color 0.3s;border-bottom:1px solid transparent}
+.lang-btn:hover{color:#A69C6E}
+.lang-btn.active{color:#A69C6E;border-color:#A69C6E}
+.lang-sep{color:rgba(166,156,110,0.3);font-size:11px}
+
 .hamburger{display:none;flex-direction:column;gap:6px;padding:8px;background:none;border:none}
 .hamburger span{display:block;width:24px;height:1px;background:#A69C6E;transition:all 0.3s}
 #mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(37,60,69,0.98);flex-direction:column;align-items:center;justify-content:center;gap:32px}
@@ -300,6 +308,15 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
       <a href="#" onclick="showPage('galeria')" data-page="galeria">Galeria</a>
       <a href="#" onclick="showPage('sobre')" data-page="sobre">História</a>
       <a href="#" onclick="showPage('contactos')" data-page="contactos">Contactos</a>
+    </div>
+    <div class="lang-selector" id="lang-selector">
+      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
@@ -1476,6 +1493,346 @@ function submitForm(e) {
   document.getElementById('form-success').style.display='block';
 }
 </script>
+
+// ============ I18N ============
+const T = {
+  pt:{
+    nav_home:'Início', nav_rooms:'Quartos', nav_rest:'Serviços & Bar', nav_spa:'Spa',
+    nav_gallery:'Galeria', nav_about:'História', nav_contacts:'Contactos', nav_reserve:'Reservar',
+    hero_label:'Charme Hotel & SPA · Serra da Estrela',
+    hero_sub:'Um refúgio íntimo no coração da Serra da Estrela.<br>A alma de um palacete do século XIX com o conforto do luxo contemporâneo.',
+    hero_discover:'Descobrir',
+    intro_label:'Inaugurado em 2024',
+    intro_title:'Onde a História se Encontra<br>com o Luxo Contemporâneo',
+    intro_p1:'O Palacete do Guerreiro, na Quinta dos Barbas, é muito mais do que um hotel: é um lugar onde a história se mistura com o design, a natureza e a hospitalidade.',
+    intro_p2:'Jardins, piscina exterior, um spa de sonho e um serviço personalizado fazem de cada estadia uma experiência inesquecível. No Parque Natural da Serra da Estrela — Geoparque UNESCO desde 2019 —, o viajante descobre privacidade, descanso e vistas que inspiram.',
+    intro_btn:'A Nossa História',
+    exp_label:'As Nossas Experiências', exp_title:'Cada Momento, Uma Memória',
+    exp_r_label:'Quartos', exp_r_title:'Quartos & Suites', exp_r_desc:'Espaços únicos com história e luxo contemporâneo',
+    exp_g_label:'Gastronomia', exp_g_title:'Restaurante', exp_g_desc:'Sabores da Serra com requinte e tradição',
+    exp_s_label:'Bem-Estar', exp_s_title:'Spa & Wellness', exp_s_desc:'Refúgio de paz e renovação total',
+    exp_b_label:'Cocktails & Bar', exp_b_title:'Bar do Palacete', exp_b_desc:'Cocktails artesanais e vinhos portugueses de eleição',
+    stats_build:'Ano de Construção', stats_stars:'Classificação', stats_rooms:'Quartos & Suites', stats_geo:'Geoparque Serra da Estrela',
+    rooms_label:'Acomodação', rooms_title:'Quartos & Suites<br><em>Únicos</em>',
+    rooms_desc1:'Cada quarto é uma história. Decorados com peças de época, materiais nobres e tecnologia discreta, os nossos espaços oferecem um retiro de luxo íntimo, com vistas deslumbrantes para a Serra da Estrela.',
+    rooms_desc2:'Da Suite Viriato ao Apartamento Duos, cada categoria foi concebida para uma experiência memorável e personalizada.',
+    rooms_btn:'Ver Todos os Quartos',
+    spa_label:'Spa & Bem-Estar', spa_title:'Um Santuário<br>de Paz e Renovação',
+    spa_desc:'O nosso spa oferece tratamentos exclusivos inspirados na natureza da Serra da Estrela. Banho turco, sala de relaxamento, massagens personalizadas e rituais únicos numa atmosfera de serenidade absoluta.',
+    spa_btn:'Explorar o Spa',
+    gardens_label:'Quinta dos Barbas', gardens_title:'Jardins Históricos',
+    serra_label:'Geoparque UNESCO', serra_title:'Serra da Estrela',
+    amenities_label:'Instalações & Serviços', amenities_title:'Tudo o que Precisa',
+    cta_label:'Reserve a Sua Estadia', cta_title:'Viva a Experiência<br>Palacete do Guerreiro',
+    cta_desc:'Cada estadia é única. Deixe-nos criar memórias inesquecíveis para si.',
+    gallery_label:'Imagens', gallery_title:'Galeria',
+    about_label:'Desde 1892', about_title:'A Nossa <em>História</em>',
+    reserve_label:'Reservas', reserve_title:'Motor de Reservas',
+    contact_label:'Fale Connosco', contact_title:'Contactos',
+    footer_hotel:'O Hotel', footer_exp:'Experiências', footer_contact:'Contacto',
+    footer_hist:'A Nossa História', footer_rooms:'Quartos & Suites', footer_rest:'Serviços & Bar', footer_spa:'Spa & Bem-Estar',
+    footer_copy:'© 2026 Palacete do Guerreiro. Todos os direitos reservados.',
+    form_name:'Nome Completo *', form_phone:'Telefone', form_email:'Email *',
+    form_subject:'Assunto', form_msg:'A sua mensagem *', form_btn:'Enviar Mensagem',
+    form_subj1:'Reserva de Quarto', form_subj2:'Reserva de Restaurante', form_subj3:'Marcação Spa', form_subj4:'Eventos Privados', form_subj5:'Outro',
+    form_ok_title:'Mensagem Enviada!', form_ok_desc:'Responderemos em breve. Obrigado pelo interesse.',
+    book_info:'Recepção: 24 horas · 7 dias por semana',
+  },
+  en:{
+    nav_home:'Home', nav_rooms:'Rooms', nav_rest:'Dining & Bar', nav_spa:'Spa',
+    nav_gallery:'Gallery', nav_about:'History', nav_contacts:'Contact', nav_reserve:'Book',
+    hero_label:'Charme Hotel & SPA · Serra da Estrela',
+    hero_sub:'An intimate retreat in the heart of Serra da Estrela.<br>The soul of a 19th-century manor with contemporary luxury comfort.',
+    hero_discover:'Discover',
+    intro_label:'Opened in 2024',
+    intro_title:'Where History Meets<br>Contemporary Luxury',
+    intro_p1:'Palacete do Guerreiro, in Quinta dos Barbas, is much more than a hotel: it is a place where history blends with design, nature and hospitality.',
+    intro_p2:'Gardens, an outdoor pool, a dream spa and personalised service make every stay unforgettable. In the Natural Park of Serra da Estrela — UNESCO Geopark since 2019 — travellers discover privacy, rest and inspiring views.',
+    intro_btn:'Our Story',
+    exp_label:'Our Experiences', exp_title:'Every Moment, A Memory',
+    exp_r_label:'Rooms', exp_r_title:'Rooms & Suites', exp_r_desc:'Unique spaces blending history and contemporary luxury',
+    exp_g_label:'Gastronomy', exp_g_title:'Restaurant', exp_g_desc:'Serra flavours with refinement and tradition',
+    exp_s_label:'Wellness', exp_s_title:'Spa & Wellness', exp_s_desc:'A sanctuary of peace and total renewal',
+    exp_b_label:'Cocktails & Bar', exp_b_title:'The Manor Bar', exp_b_desc:'Artisan cocktails and select Portuguese wines',
+    stats_build:'Year Built', stats_stars:'Classification', stats_rooms:'Rooms & Suites', stats_geo:'Serra da Estrela UNESCO Geopark',
+    rooms_label:'Accommodation', rooms_title:'Rooms & Suites<br><em>Unique</em>',
+    rooms_desc1:'Each room tells a story. Decorated with period pieces, noble materials and discreet technology, our spaces offer an intimate luxury retreat with breathtaking views of Serra da Estrela.',
+    rooms_desc2:'From the Viriato Suite to the Dvmos Apartment, each category was designed for a memorable, personalised experience.',
+    rooms_btn:'View All Rooms',
+    spa_label:'Spa & Wellness', spa_title:'A Sanctuary<br>of Peace & Renewal',
+    spa_desc:'Our spa offers exclusive treatments inspired by the nature of Serra da Estrela. Turkish bath, relaxation room, personalised massages and unique rituals in an atmosphere of absolute serenity.',
+    spa_btn:'Explore the Spa',
+    gardens_label:'Quinta dos Barbas', gardens_title:'Historic Gardens',
+    serra_label:'UNESCO Geopark', serra_title:'Serra da Estrela',
+    amenities_label:'Facilities & Services', amenities_title:'Everything You Need',
+    cta_label:'Book Your Stay', cta_title:'Live the Experience<br>Palacete do Guerreiro',
+    cta_desc:'Every stay is unique. Let us create unforgettable memories for you.',
+    gallery_label:'Images', gallery_title:'Gallery',
+    about_label:'Since 1892', about_title:'Our <em>History</em>',
+    reserve_label:'Reservations', reserve_title:'Booking Engine',
+    contact_label:'Get in Touch', contact_title:'Contact',
+    footer_hotel:'The Hotel', footer_exp:'Experiences', footer_contact:'Contact',
+    footer_hist:'Our Story', footer_rooms:'Rooms & Suites', footer_rest:'Dining & Bar', footer_spa:'Spa & Wellness',
+    footer_copy:'© 2026 Palacete do Guerreiro. All rights reserved.',
+    form_name:'Full Name *', form_phone:'Phone', form_email:'Email *',
+    form_subject:'Subject', form_msg:'Your message *', form_btn:'Send Message',
+    form_subj1:'Room Reservation', form_subj2:'Restaurant Reservation', form_subj3:'Spa Booking', form_subj4:'Private Events', form_subj5:'Other',
+    form_ok_title:'Message Sent!', form_ok_desc:'We will reply shortly. Thank you for your interest.',
+    book_info:'Reception: 24 hours · 7 days a week',
+  },
+  es:{
+    nav_home:'Inicio', nav_rooms:'Habitaciones', nav_rest:'Restaurante & Bar', nav_spa:'Spa',
+    nav_gallery:'Galería', nav_about:'Historia', nav_contacts:'Contacto', nav_reserve:'Reservar',
+    hero_label:'Charme Hotel & SPA · Serra da Estrela',
+    hero_sub:'Un refugio íntimo en el corazón de la Serra da Estrela.<br>El alma de un palacete del siglo XIX con el confort del lujo contemporáneo.',
+    hero_discover:'Descubrir',
+    intro_label:'Inaugurado en 2024',
+    intro_title:'Donde la Historia se Encuentra<br>con el Lujo Contemporáneo',
+    intro_p1:'El Palacete do Guerreiro, en la Quinta dos Barbas, es mucho más que un hotel: es un lugar donde la historia se mezcla con el diseño, la naturaleza y la hospitalidad.',
+    intro_p2:'Jardines, piscina exterior, un spa de ensueño y un servicio personalizado hacen de cada estancia una experiencia inolvidable. En el Parque Natural de la Serra da Estrela — Geoparque UNESCO desde 2019 —, el viajero descubre privacidad, descanso y vistas inspiradoras.',
+    intro_btn:'Nuestra Historia',
+    exp_label:'Nuestras Experiencias', exp_title:'Cada Momento, Un Recuerdo',
+    exp_r_label:'Habitaciones', exp_r_title:'Habitaciones & Suites', exp_r_desc:'Espacios únicos con historia y lujo contemporáneo',
+    exp_g_label:'Gastronomía', exp_g_title:'Restaurante', exp_g_desc:'Sabores de la Serra con refinamiento y tradición',
+    exp_s_label:'Bienestar', exp_s_title:'Spa & Wellness', exp_s_desc:'Refugio de paz y renovación total',
+    exp_b_label:'Cócteles & Bar', exp_b_title:'Bar del Palacete', exp_b_desc:'Cócteles artesanales y vinos portugueses de selección',
+    stats_build:'Año de Construcción', stats_stars:'Clasificación', stats_rooms:'Habitaciones & Suites', stats_geo:'Geoparque UNESCO Serra da Estrela',
+    rooms_label:'Alojamiento', rooms_title:'Habitaciones & Suites<br><em>Únicas</em>',
+    rooms_desc1:'Cada habitación cuenta una historia. Decoradas con piezas de época, materiales nobles y tecnología discreta, nuestros espacios ofrecen un retiro de lujo íntimo con vistas impresionantes a la Serra da Estrela.',
+    rooms_desc2:'Desde la Suite Viriato hasta el Apartamento Dvmos, cada categoría ha sido concebida para una experiencia memorable y personalizada.',
+    rooms_btn:'Ver Todas las Habitaciones',
+    spa_label:'Spa & Bienestar', spa_title:'Un Santuario<br>de Paz y Renovación',
+    spa_desc:'Nuestro spa ofrece tratamientos exclusivos inspirados en la naturaleza de la Serra da Estrela. Baño turco, sala de relajación, masajes personalizados y rituales únicos en una atmósfera de serenidad absoluta.',
+    spa_btn:'Explorar el Spa',
+    gardens_label:'Quinta dos Barbas', gardens_title:'Jardines Históricos',
+    serra_label:'Geoparque UNESCO', serra_title:'Serra da Estrela',
+    amenities_label:'Instalaciones & Servicios', amenities_title:'Todo lo que Necesitas',
+    cta_label:'Reserva Tu Estancia', cta_title:'Vive la Experiencia<br>Palacete do Guerreiro',
+    cta_desc:'Cada estancia es única. Déjanos crear recuerdos inolvidables para ti.',
+    gallery_label:'Imágenes', gallery_title:'Galería',
+    about_label:'Desde 1892', about_title:'Nuestra <em>Historia</em>',
+    reserve_label:'Reservas', reserve_title:'Motor de Reservas',
+    contact_label:'Contáctanos', contact_title:'Contacto',
+    footer_hotel:'El Hotel', footer_exp:'Experiencias', footer_contact:'Contacto',
+    footer_hist:'Nuestra Historia', footer_rooms:'Habitaciones & Suites', footer_rest:'Restaurante & Bar', footer_spa:'Spa & Bienestar',
+    footer_copy:'© 2026 Palacete do Guerreiro. Todos los derechos reservados.',
+    form_name:'Nombre Completo *', form_phone:'Teléfono', form_email:'Email *',
+    form_subject:'Asunto', form_msg:'Su mensaje *', form_btn:'Enviar Mensaje',
+    form_subj1:'Reserva de Habitación', form_subj2:'Reserva de Restaurante', form_subj3:'Cita Spa', form_subj4:'Eventos Privados', form_subj5:'Otro',
+    form_ok_title:'¡Mensaje Enviado!', form_ok_desc:'Le responderemos en breve. Gracias por su interés.',
+    book_info:'Recepción: 24 horas · 7 días a la semana',
+  },
+  fr:{
+    nav_home:'Accueil', nav_rooms:'Chambres', nav_rest:'Restaurant & Bar', nav_spa:'Spa',
+    nav_gallery:'Galerie', nav_about:'Histoire', nav_contacts:'Contact', nav_reserve:'Réserver',
+    hero_label:'Charme Hotel & SPA · Serra da Estrela',
+    hero_sub:'Un refuge intime au cœur de la Serra da Estrela.<br>L'âme d'un palais du XIXe siècle avec le confort du luxe contemporain.',
+    hero_discover:'Découvrir',
+    intro_label:'Ouvert en 2024',
+    intro_title:'Là où l'Histoire Rencontre<br>le Luxe Contemporain',
+    intro_p1:'Le Palacete do Guerreiro, à la Quinta dos Barbas, est bien plus qu'un hôtel : c'est un lieu où l'histoire se mêle au design, à la nature et à l'hospitalité.',
+    intro_p2:'Jardins, piscine extérieure, un spa de rêve et un service personnalisé font de chaque séjour une expérience inoubliable. Dans le Parc Naturel de la Serra da Estrela — Géoparc UNESCO depuis 2019 —, le voyageur découvre intimité, repos et paysages inspirants.',
+    intro_btn:'Notre Histoire',
+    exp_label:'Nos Expériences', exp_title:'Chaque Moment, Un Souvenir',
+    exp_r_label:'Chambres', exp_r_title:'Chambres & Suites', exp_r_desc:'Espaces uniques alliant histoire et luxe contemporain',
+    exp_g_label:'Gastronomie', exp_g_title:'Restaurant', exp_g_desc:'Saveurs de la Serra avec raffinement et tradition',
+    exp_s_label:'Bien-être', exp_s_title:'Spa & Wellness', exp_s_desc:'Refuge de paix et de renouveau total',
+    exp_b_label:'Cocktails & Bar', exp_b_title:'Bar du Palais', exp_b_desc:'Cocktails artisanaux et vins portugais de sélection',
+    stats_build:'Année de Construction', stats_stars:'Classification', stats_rooms:'Chambres & Suites', stats_geo:'Géoparc UNESCO Serra da Estrela',
+    rooms_label:'Hébergement', rooms_title:'Chambres & Suites<br><em>Uniques</em>',
+    rooms_desc1:'Chaque chambre raconte une histoire. Décorées avec des pièces d'époque, des matériaux nobles et une technologie discrète, nos espaces offrent un refuge de luxe intime avec des vues à couper le souffle.',
+    rooms_desc2:'De la Suite Viriato à l'Appartement Dvmos, chaque catégorie a été conçue pour une expérience mémorable et personnalisée.',
+    rooms_btn:'Voir Toutes les Chambres',
+    spa_label:'Spa & Bien-être', spa_title:'Un Sanctuaire<br>de Paix et de Renouveau',
+    spa_desc:'Notre spa propose des soins exclusifs inspirés par la nature de la Serra da Estrela. Bain turc, salle de relaxation, massages personnalisés et rituels uniques dans une atmosphère de sérénité absolue.',
+    spa_btn:'Explorer le Spa',
+    gardens_label:'Quinta dos Barbas', gardens_title:'Jardins Historiques',
+    serra_label:'Géoparc UNESCO', serra_title:'Serra da Estrela',
+    amenities_label:'Installations & Services', amenities_title:'Tout ce dont Vous Avez Besoin',
+    cta_label:'Réservez Votre Séjour', cta_title:'Vivez l'Expérience<br>Palacete do Guerreiro',
+    cta_desc:'Chaque séjour est unique. Laissez-nous créer des souvenirs inoubliables pour vous.',
+    gallery_label:'Images', gallery_title:'Galerie',
+    about_label:'Depuis 1892', about_title:'Notre <em>Histoire</em>',
+    reserve_label:'Réservations', reserve_title:'Moteur de Réservation',
+    contact_label:'Contactez-nous', contact_title:'Contact',
+    footer_hotel:'L'Hôtel', footer_exp:'Expériences', footer_contact:'Contact',
+    footer_hist:'Notre Histoire', footer_rooms:'Chambres & Suites', footer_rest:'Restaurant & Bar', footer_spa:'Spa & Bien-être',
+    footer_copy:'© 2026 Palacete do Guerreiro. Tous droits réservés.',
+    form_name:'Nom Complet *', form_phone:'Téléphone', form_email:'Email *',
+    form_subject:'Sujet', form_msg:'Votre message *', form_btn:'Envoyer le Message',
+    form_subj1:'Réservation de Chambre', form_subj2:'Réservation Restaurant', form_subj3:'Rendez-vous Spa', form_subj4:'Événements Privés', form_subj5:'Autre',
+    form_ok_title:'Message Envoyé !', form_ok_desc:'Nous vous répondrons sous peu. Merci de votre intérêt.',
+    book_info:'Réception : 24 heures · 7 jours sur 7',
+  }
+};
+
+let currentLang = localStorage.getItem('pdg_lang') || 'pt';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('pdg_lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === lang);
+  });
+  applyTranslations();
+}
+
+function t(key) {
+  return (T[currentLang] && T[currentLang][key]) || T['pt'][key] || key;
+}
+
+function applyTranslations() {
+  const l = currentLang;
+  // Nav links
+  const navLinks = document.querySelectorAll('.nav-links a[data-page]');
+  const navKeys = ['home','rooms','rest','spa','gallery','about','contacts'];
+  navLinks.forEach((a,i) => { if(navKeys[i]) a.innerHTML = t('nav_'+navKeys[i]); });
+  
+  // Mobile menu links
+  const mLinks = document.querySelectorAll('#mobile-menu a');
+  mLinks.forEach((a,i) => { if(navKeys[i]) a.innerHTML = t('nav_'+navKeys[i]); });
+
+  // Hero
+  const heroLabel = document.querySelector('#hero .label');
+  const heroSub = document.querySelector('.hero-sub');
+  const heroBtn = document.querySelector('.hero-btns .btn-outline-white');
+  if(heroLabel) heroLabel.innerHTML = t('hero_label');
+  if(heroSub) heroSub.innerHTML = t('hero_sub');
+  if(heroBtn) heroBtn.innerHTML = t('hero_discover');
+
+  // Intro
+  const introSec = document.querySelector('.intro-section');
+  if(introSec) {
+    const labels = introSec.querySelectorAll('.label');
+    if(labels[0]) labels[0].innerHTML = t('intro_label');
+    const title = introSec.querySelector('.section-title');
+    if(title) title.innerHTML = t('intro_title');
+    const bodyTexts = introSec.querySelectorAll('.body-text');
+    if(bodyTexts[0]) bodyTexts[0].innerHTML = t('intro_p1');
+    if(bodyTexts[1]) bodyTexts[1].innerHTML = t('intro_p2');
+    const introBtn = introSec.querySelector('.btn-outline');
+    if(introBtn) introBtn.innerHTML = t('intro_btn');
+  }
+
+  // Experience cards
+  const expSection = document.querySelector('.exp-grid');
+  if(expSection) {
+    const cards = expSection.querySelectorAll('.exp-card');
+    const expKeys = [
+      {label:'exp_r_label',title:'exp_r_title',desc:'exp_r_desc'},
+      {label:'exp_g_label',title:'exp_g_title',desc:'exp_g_desc'},
+      {label:'exp_s_label',title:'exp_s_title',desc:'exp_s_desc'},
+      {label:'exp_b_label',title:'exp_b_title',desc:'exp_b_desc'},
+    ];
+    cards.forEach((card,i) => {
+      if(!expKeys[i]) return;
+      const lbl = card.querySelector('.label');
+      const h3 = card.querySelector('h3');
+      const p = card.querySelector('.body-text');
+      if(lbl) lbl.innerHTML = t(expKeys[i].label);
+      if(h3) h3.innerHTML = t(expKeys[i].title);
+      if(p) p.innerHTML = t(expKeys[i].desc);
+    });
+  }
+
+  // Stats
+  const statsGrid = document.querySelector('.stats-grid');
+  if(statsGrid) {
+    const labels = statsGrid.querySelectorAll('.stat-label');
+    const sKeys = ['stats_build','stats_stars','stats_rooms','stats_geo'];
+    labels.forEach((el,i) => { if(sKeys[i]) el.innerHTML = t(sKeys[i]); });
+  }
+
+  // CTA section
+  const ctaSec = document.querySelector('.cta-section');
+  if(ctaSec) {
+    const lbl = ctaSec.querySelector('.label');
+    const title = ctaSec.querySelector('.section-title');
+    const desc = ctaSec.querySelector('.body-text');
+    if(lbl) lbl.innerHTML = t('cta_label');
+    if(title) title.innerHTML = t('cta_title');
+    if(desc) desc.innerHTML = t('cta_desc');
+  }
+
+  // Serra label
+  const serraSection = document.querySelector('.serra-section');
+  if(serraSection) {
+    const labels = serraSection.querySelectorAll('.label');
+    if(labels[0]) labels[0].innerHTML = t('serra_label');
+    const title = serraSection.querySelector('.section-title');
+    if(title) title.innerHTML = t('serra_title');
+  }
+
+  // Amenities
+  const amenSec = document.querySelector('.amenities-section');
+  if(amenSec) {
+    const lbl = amenSec.querySelector('.label');
+    const title = amenSec.querySelector('.section-title');
+    if(lbl) lbl.innerHTML = t('amenities_label');
+    if(title) title.innerHTML = t('amenities_title');
+  }
+
+  // Gallery page
+  const galPage = document.querySelector('#page-galeria .page-hero-content');
+  if(galPage) {
+    const lbl = galPage.querySelector('.label');
+    const title = galPage.querySelector('.section-title');
+    if(lbl) lbl.innerHTML = t('gallery_label');
+    if(title) title.innerHTML = t('gallery_title');
+  }
+
+  // Reservas page
+  const resPage = document.querySelector('#page-reservas');
+  if(resPage) {
+    const lbl = resPage.querySelector('.label');
+    const title = resPage.querySelector('.section-title');
+    if(lbl) lbl.innerHTML = t('reserve_label');
+    if(title) title.innerHTML = t('reserve_title');
+  }
+
+  // Footer copies (all injected footers)
+  document.querySelectorAll('.footer-copy').forEach(el => el.innerHTML = t('footer_copy'));
+  document.querySelectorAll('.footer-links').forEach((linksEl, idx) => {
+    const anchors = linksEl.querySelectorAll('a');
+    if(idx % 2 === 0) { // O Hotel column
+      if(anchors[0]) anchors[0].innerHTML = t('footer_hist');
+      if(anchors[1]) anchors[1].innerHTML = t('footer_rooms');
+    } else { // Experiências column
+      if(anchors[0]) anchors[0].innerHTML = t('footer_rest');
+      if(anchors[1]) anchors[1].innerHTML = t('footer_spa');
+    }
+  });
+
+  // Contact form
+  const nameInput = document.querySelector('#contact-form input[placeholder*="Nome"], #contact-form input[placeholder*="Name"], #contact-form input[placeholder*="Nombre"], #contact-form input[placeholder*="Nom"]');
+  if(nameInput) nameInput.placeholder = t('form_name');
+  const phoneInput = document.querySelector('#contact-form input[placeholder*="Telef"], #contact-form input[placeholder*="Phone"], #contact-form input[placeholder*="Tél"]');
+  if(phoneInput) phoneInput.placeholder = t('form_phone');
+  const emailInput = document.querySelector('#contact-form input[type="email"]');
+  if(emailInput) emailInput.placeholder = t('form_email');
+  const msgArea = document.querySelector('#contact-form textarea');
+  if(msgArea) msgArea.placeholder = t('form_msg');
+  const sendBtn = document.querySelector('#contact-form button[type="submit"]');
+  if(sendBtn) sendBtn.innerHTML = t('form_btn');
+
+  // Contact page hero
+  const contactHero = document.querySelector('#page-contactos .page-hero-content');
+  if(contactHero) {
+    const lbl = contactHero.querySelector('.label');
+    const title = contactHero.querySelector('.section-title');
+    if(lbl) lbl.innerHTML = t('contact_label');
+    if(title) title.innerHTML = t('contact_title');
+  }
+}
+
+// Apply on load
+document.addEventListener('DOMContentLoaded', () => {
+  // small delay to let footers inject
+  setTimeout(() => {
+    setLang(currentLang);
+  }, 200);
+});
 
 <!-- CiprianoDigital -->
 <style>
