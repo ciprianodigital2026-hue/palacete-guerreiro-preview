@@ -318,6 +318,7 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
       <a href="#" onclick="showPage('sobre')" data-page="sobre">História</a>
       <a href="#" onclick="showPage('contactos')" data-page="contactos">Contactos</a>
     </div>
+    <button class="nav-cta" onclick="showPage('reservas')" data-i18n="nav_reserve">Reservar</button>
     <div class="lang-selector" id="lang-selector">
       <button class="lang-btn active" onclick="setLang('pt')">PT</button>
       <span class="lang-sep">·</span>
@@ -342,6 +343,7 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
   <a href="#" onclick="showPage('galeria');toggleMenu()">Galeria</a>
   <a href="#" onclick="showPage('sobre');toggleMenu()">História</a>
   <a href="#" onclick="showPage('contactos');toggleMenu()">Contactos</a>
+  <a href="#" onclick="showPage('reservas');toggleMenu()" style="color:#A69C6E">Reservar</a>
 </div>
 
 <!-- ================== HOME ================== -->
@@ -1009,20 +1011,18 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
 
 <!-- ================== RESERVAS ================== -->
 <div id="page-reservas" class="page">
-  <div style="padding:120px 24px;text-align:center;max-width:900px;margin:0 auto">
-    <p class="label" style="margin-bottom:24px">Reservas</p>
-    <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:24px">Motor de Reservas</h2>
-    <div class="gold-divider" style="margin-top:24px;margin-bottom:48px"><div class="line-l"></div><span class="dot">◆</span><div class="line-r"></div></div>
-
-
-    <div id="booking-widget-container" style="border-radius:4px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4)">
+  <div style="padding-top:80px;min-height:100vh;display:flex;flex-direction:column">
+    <div style="text-align:center;padding:40px 24px 32px">
+      <p class="label" style="margin-bottom:16px" data-i18n="reserve_label">Reservas</p>
+      <h2 class="section-title" style="font-size:clamp(1.8rem,4vw,3rem);margin-bottom:16px" data-i18n="reserve_title">Motor de Reservas</h2>
+      <div class="gold-divider" style="margin:0 auto"><div class="line-l"></div><span class="dot">◆</span><div class="line-r"></div></div>
+    </div>
+    <div style="flex:1;padding:0 0 0 0">
       <iframe src="https://palacete-guerreiro-dot-secure-booking46.appspot.com/booking1?adultsRoom1=2&entry_tomorrow=true"
-        width="100%" height="520" frameborder="0"
-        style="border:none;width:100%;min-height:520px;display:block;background:#fff">
+        width="100%" height="800" frameborder="0"
+        style="border:none;width:100%;min-height:800px;display:block;background:#fff">
       </iframe>
     </div>
-
-
   </div>
 </div>
 
@@ -1323,6 +1323,7 @@ function initNavScroll() {
   });
 }
 
+function navigate(page) { showPage(page); }
 function showPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
