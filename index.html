@@ -1794,15 +1794,6 @@ function applyTranslations() {
     if(title) title.innerHTML = t('gallery_title');
   }
 
-  // Reservas page
-  const resPage = document.querySelector('#page-reservas');
-  if(resPage) {
-    const lbl = resPage.querySelector('.label');
-    const title = resPage.querySelector('.section-title');
-    if(lbl) lbl.innerHTML = t('reserve_label');
-    if(title) title.innerHTML = t('reserve_title');
-  }
-
   // Footer copies (all injected footers)
   document.querySelectorAll('.footer-copy').forEach(el => el.innerHTML = t('footer_copy'));
   document.querySelectorAll('.footer-links').forEach((linksEl, idx) => {
