@@ -1085,7 +1085,6 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
 </div>
 
 <!-- FOOTER TEMPLATE -->
-<template id="footer-tpl">
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
@@ -1128,7 +1127,6 @@ footer{background:#060e1a;border-top:1px solid rgba(166,156,110,0.2)}
     </div>
   </div>
 </footer>
-</template>
 
 <script>
 // ============ DATA ============
@@ -1304,11 +1302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function injectFooters() {
-  const tpl = document.getElementById('footer-tpl').content;
-  ['home','quartos','restaurante','spa','galeria','sobre','reservas','contactos'].forEach(p => {
-    const el = document.getElementById(p+'-footer');
-    if(el) el.appendChild(tpl.cloneNode(true));
-  });
+  // footer is global, already in DOM
 }
 
 function initHero() {
